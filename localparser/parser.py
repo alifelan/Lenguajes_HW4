@@ -3,10 +3,10 @@ from localparser.filter import filter
 ERROR = 999
 
 TRANSITION_MATRIX = (
-    (102, ERROR, 1, 104, 105, 0, ERROR),
-    (ERROR, 103, ERROR, ERROR, ERROR, ERROR, ERROR),
-    (102, ERROR, ERROR, ERROR, ERROR, ERROR, ERROR),
-    (103, 103, ERROR, ERROR, ERROR, ERROR, ERROR)
+    (1,     ERROR,  2,      104,    0,      105,    ERROR),
+    (1,     ERROR,  ERROR,  102,    102,    102,    ERROR),
+    (ERROR, 3,      ERROR,  ERROR,  ERROR,  ERROR,  ERROR),
+    (3,     3,      ERROR,  103,    103,    103,    ERROR)
 )
 
 TOKENS_NAMES = {
@@ -31,15 +31,27 @@ def parse(s: str)-> list:
     """
     tokens: list = []
     state: int = 0
-    value: str = ''
+    # value: str = ''
     for c in s:
         state = TRANSITION_MATRIX[state][filter(c)]
-        if state != 0:
-            value += c
+        # if 100 > state != 0:
+        #    value += c
         if state == 999:
             raise SyntaxError('Invalid token')
         if state > 100:
-            tokens.append((TOKENS_NAMES[state], value))
-            state = 0
-            value = ''
+            tokens.append(TOKENS_NAMES[state])
+            if state == 102 or state == 103:
+                state = TRANSITION_MATRIX[0][filter(c)]
+                # if 100 > state != 0:
+                #    value = c
+                if state == 999:
+                    raise SyntaxError('Invalid token')
+                if state > 100:
+                    tokens.append(TOKENS_NAMES[state])
+                    state = 0
+                    # value = ''
+                # value = c
+            else:
+                state = 0
+            # value = ''
     return tokens

@@ -18,8 +18,8 @@ def filter(c: str)->int:
     elif c in '()':
         return 3
     elif c == ' ':
-        return 5
-    elif c in '+-*/':
         return 4
+    elif c in '+-*/':
+        return 5
     else:
         return 6
