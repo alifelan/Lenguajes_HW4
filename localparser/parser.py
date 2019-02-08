@@ -31,27 +31,28 @@ def parse(s: str)-> list:
     """
     tokens: list = []
     state: int = 0
-    # value: str = ''
+    value: str = ''
     for c in s:
         state = TRANSITION_MATRIX[state][filter(c)]
-        # if 100 > state != 0:
-        #    value += c
+        if 100 > state != 0 or state == 104 or state == 105:
+            value += c
         if state == 999:
             raise SyntaxError('Invalid token')
         if state > 100:
-            tokens.append(TOKENS_NAMES[state])
+            tokens.append((TOKENS_NAMES[state], value))
             if state == 102 or state == 103:
                 state = TRANSITION_MATRIX[0][filter(c)]
-                # if 100 > state != 0:
-                #    value = c
+                if 100 > state != 0:
+                    value = c
                 if state == 999:
                     raise SyntaxError('Invalid token')
                 if state > 100:
-                    tokens.append(TOKENS_NAMES[state])
+                    print(c)
+                    tokens.append((TOKENS_NAMES[state], c))
                     state = 0
-                    # value = ''
-                # value = c
+                    value = ''
+                value = c
             else:
                 state = 0
-                # value = ''
+                value = ''
     return tokens
