@@ -11,9 +11,8 @@ def main():
         input_string = input()
     string_to_parse = "{} ".format(input_string)
     tokens = scan(string_to_parse)
-    print(tokens)
-    if parse(tokens):
-        print("Valid input!")
+    parse(tokens)
+    print("Valid input!")
 
 
 if __name__ == '__main__':
