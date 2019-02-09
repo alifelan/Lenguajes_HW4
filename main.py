@@ -1,4 +1,5 @@
 import sys
+from localparser.scanner import scan
 from localparser.parser import parse
 
 
@@ -9,7 +10,10 @@ def main():
         print("Please type your line: ")
         input_string = input()
     string_to_parse = "{} ".format(input_string)
-    print(parse(string_to_parse))
+    tokens = scan(string_to_parse)
+    print(tokens)
+    if parse(tokens):
+        print("Valid input!")
 
 
 if __name__ == '__main__':
