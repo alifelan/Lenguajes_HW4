@@ -40,6 +40,8 @@ def scan(s: str)-> list:
             raise SyntaxError('Invalid token')
         if state > 100:
             tokens.append((TOKENS_NAMES[state], value))
+            state = 0
+            value = ''
             if state == 102 or state == 103:
                 state = TRANSITION_MATRIX[0][filter(c)]
                 if 100 > state != 0:
@@ -50,7 +52,4 @@ def scan(s: str)-> list:
                     tokens.append((TOKENS_NAMES[state], c.strip()))
                     state = 0
                     value = ''
-            else:
-                state = 0
-                value = ''
     return tokens
