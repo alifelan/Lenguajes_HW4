@@ -50,7 +50,6 @@ def scan(s: str)-> list:
                     tokens.append((TOKENS_NAMES[state], c.strip()))
                     state = 0
                     value = ''
-                value = c
             else:
                 state = 0
                 value = ''

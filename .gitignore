@@ -1,1 +1,2 @@
 *.zip
+localparser/__pycache__/
