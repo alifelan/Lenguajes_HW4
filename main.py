@@ -1,6 +1,6 @@
 import sys
 from localparser.scanner import scan
-from localparser.parser import parse
+from localparser.parser import parseS as parse
 
 
 def main():

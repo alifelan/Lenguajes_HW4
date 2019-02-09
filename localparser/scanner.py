@@ -47,8 +47,7 @@ def scan(s: str)-> list:
                 if state == 999:
                     raise SyntaxError('Invalid token')
                 if state > 100:
-                    print(c)
-                    tokens.append((TOKENS_NAMES[state], c))
+                    tokens.append((TOKENS_NAMES[state], c.strip()))
                     state = 0
                     value = ''
                 value = c
